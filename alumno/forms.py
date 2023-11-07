@@ -1,3 +1,4 @@
+import re
 from typing import Any
 from django import forms
 from .models import Alumno
@@ -10,11 +11,20 @@ class AlumnoForm(forms.ModelForm):
     class Meta:
         model = Alumno
         fields = '__all__'
-    #    widgets = {
-    #        'fechaDeNacimiento': forms.TextInput(attrs={'type': 'date', 'pattern': r'\d{2}/\d{2}/\d{4}', 'placeholder': 'dd/mm/yyyy'}),
-    #    }
+        widgets = {
+           'fechaDeNacimiento': forms.TextInput(attrs={'type': 'date', 'pattern': r'\d{2}/\d{2}/\d{4}', 'placeholder': 'dd/mm/yyyy'}),
+        }
         
 
+
+   
+    def clean_rut(self):
+        rut = self.cleaned_data.get('rut')
+        if rut:
+            rut = re.sub(r'\.', '', rut).upper()
+            if not re.match(r'^\d{1,8}-[0-9K]$', rut):
+                raise forms.ValidationError('El RUT no es válido.')
+        return rut
 
     def clean_nombre(self):
         nombre = self.cleaned_data['nombre']
