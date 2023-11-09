@@ -33,3 +33,7 @@ def eliminar_alumno(request, id):
         alumno.delete()
         return redirect('lista_alumnos')
     return render(request, 'alumno/eliminar_alumno.html', {'alumno': alumno})
+
+
+def indice(request):
+    return render(request, 'indice.html')
