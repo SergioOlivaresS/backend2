@@ -9,6 +9,6 @@ class AlumnoAdminForm(AlumnoForm):
 
 class AlumnoAdmin(admin.ModelAdmin):
     list_display = ['rut', 'nombre', 'apellido', 'carrera', 'fechaDeNacimiento', 'email']
-    form = AlumnoAdminForm  # Establece el formulario personalizado
+    form = AlumnoAdminForm  
 
 admin.site.register(Alumno, AlumnoAdmin)
