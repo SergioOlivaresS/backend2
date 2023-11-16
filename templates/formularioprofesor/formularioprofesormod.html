@@ -10,10 +10,22 @@
 </head>
 <body>
     <h1>Formulario de ramos</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'ramosData' %}">Ramos</a></li>
+            <li><a href="{% url 'formularioramos' %}">Formulario Ramos</a></li>
+            <li><a href="{% url 'profesorData' %}">Profesor</a></li>
+            <li><a href="{% url 'formulario_profesor' %}">Formulario Profesor</a></li>
+            <li><a href="{% url 'crear_alumno' %}">Formulario Alumno</a></li>
+            <li><a href="{% url 'lista_alumnos' %}">Alumnos</a></li>
+        </ul>
+    </nav>
     <form method="post" action="{% url 'modificar_profesor' idProfesor=idProfesor %}">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" value="Registrar">Enviar</button>
     </form>
+
 </body>
 </html>
