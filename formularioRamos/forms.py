@@ -1,5 +1,7 @@
 from django import forms
 from formularioRamos.models import Ramos
+from typing import Any
+from django import forms
 
 class RamosForm(forms.ModelForm):
     class Meta:
@@ -14,4 +16,21 @@ class RamosForm(forms.ModelForm):
             'sala': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        if len(nombre) < 2:
+            raise forms.ValidationError('El nombre debe tener almenos 2 letras.')
+        return nombre
+    
+    def clean_descripcion(self):
+        descripcion = self.cleaned_data['descripcion']
+        if len(descripcion) < 10:
+            raise forms.ValidationError('La descripcion debe ser mas larga.')
+        return descripcion
+    
+    def clean_carrera(self):
+        carrera = self.cleaned_data['carrera']
+        if len(carrera) < 6:
+            raise forms.ValidationError('La carrera debe tener almenos 6 letras.')
+        return carrera
 
