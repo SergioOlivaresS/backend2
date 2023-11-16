@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Alumno</title>
+</head>
+<body>
+    <h1>Editar Alumno</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar cambios">
+    </form>
+    <a href="{% url 'lista_alumnos' %}">Volver a la lista de alumnos</a>
+</body>
+</html>
