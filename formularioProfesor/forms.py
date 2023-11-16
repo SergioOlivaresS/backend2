@@ -45,4 +45,10 @@ class ProfesorForm(forms.ModelForm):
         if len(telefonostr) < 9:
             raise forms.ValidationError('El telefono debe tener 9 numeros.')
         return telefono
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and email.find('@') == -1:
+            raise forms.ValidationError("El correo debe contener @")
+        return email
 
