@@ -1,7 +1,6 @@
 from django.contrib import admin
 from alumno.forms import AlumnoForm
 from alumno.models import Alumno
-from django import forms
 
 class AlumnoAdminForm(AlumnoForm):
     class Meta(AlumnoForm.Meta):

@@ -1,9 +1,15 @@
 from django import forms
-from formularioRamos.models import Ramos
+from formularioRamos.models import Ramos , Profesor
 from typing import Any
 from django import forms
 
 class RamosForm(forms.ModelForm):
+    profesor = forms.ModelChoiceField(
+        queryset=Profesor.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+
     class Meta:
         model = Ramos
         fields = '__all__'
