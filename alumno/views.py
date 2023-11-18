@@ -3,9 +3,9 @@ from .models import Alumno
 from .forms import AlumnoForm
 
 def lista_alumnos(request):
+    form = AlumnoForm() 
     alumnos = Alumno.objects.all()
-    return render(request, 'alumno/lista_alumnos.html', {'alumnos': alumnos})
-
+    return render(request, 'alumno/lista_alumnos.html', {'alumnos': alumnos, 'form': form})
 def crear_alumno(request):
     if request.method == 'POST':
         form = AlumnoForm(request.POST)
