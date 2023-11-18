@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eliminar Alumno</title>
+</head>
+<body>
+    <h1>Eliminar Alumno</h1>
+    <p>¿Seguro que deseas eliminar a {{ alumno.nombre }} {{ alumno.apellido }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar eliminación">
+    </form>
+    <a href="{% url 'lista_alumnos' %}">Cancelar </a>
+</body>
+</html>
