@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Alumnos</title>
+</head>
+<body>
+    <a href="{% url 'crear_alumno' %}">Crear Alumno</a>
+    <h1>Lista de Alumnos</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+        </ul>
+    </nav>
+    <table>
+        <tr>
+            <th>RUT</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Carrera</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Email</th>
+            <th>Ramos</th>  
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for alumno in alumnos %}
+            <tr>
+                <td>{{ alumno.rut }}</td>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.apellido }}</td>
+                <td>{{ alumno.carrera }}</td>
+                <td>{{ alumno.fechaDeNacimiento }}</td>
+                <td>{{ alumno.email }}</td>
+                <td>
+                    {% for ramo in alumno.ramos.all %}
+                        {{ ramo.nombre }}<br>
+                    {% endfor %}
+                </td>
+                <td><a href="{% url 'editar_alumno' alumno.idalumno %}">Editar</a></td>
+                <td><a href="{% url 'eliminar_alumno' alumno.idalumno %}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
