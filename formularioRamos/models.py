@@ -1,5 +1,4 @@
 from django.db import models
-
 from formularioProfesor.models import Profesor
 
 class Ramos(models.Model):
@@ -11,6 +10,7 @@ class Ramos(models.Model):
     horas = models.IntegerField()
     sala = models.CharField(max_length=10)
     profesor = models.ForeignKey(Profesor, on_delete=models.SET_NULL, null=True, blank=True, related_name='ramos')
+
     def __str__(self):
         return self.nombre
 

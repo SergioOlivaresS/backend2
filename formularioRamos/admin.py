@@ -7,7 +7,11 @@ class RamosAdminForm(RamosForm):
         model = Ramos
 
 class RamosAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'carrera', 'descripcion', 'creditos', 'horas', 'sala']
+    list_display = ['nombre', 'carrera', 'descripcion', 'creditos', 'horas', 'sala', 'profesor_display']
     form = RamosAdminForm
+
+    def profesor_display(self, obj):
+        return str(obj.profesor)
+    profesor_display.short_description = 'Profesor'
 
 admin.site.register(Ramos, RamosAdmin)

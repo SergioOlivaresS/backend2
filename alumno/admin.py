@@ -7,7 +7,8 @@ class AlumnoAdminForm(AlumnoForm):
         model = Alumno
 
 class AlumnoAdmin(admin.ModelAdmin):
-    list_display = ['rut', 'nombre', 'apellido', 'carrera', 'fechaDeNacimiento', 'email']
+    list_display = ['rut', 'nombre', 'apellido', 'carrera', 'fechaDeNacimiento', 'email', 'get_ramos_display']
+    list_filter = ['ramos']
     form = AlumnoAdminForm  
 
 admin.site.register(Alumno, AlumnoAdmin)
