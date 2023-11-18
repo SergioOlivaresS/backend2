@@ -40,3 +40,20 @@ class RamosForm(forms.ModelForm):
             raise forms.ValidationError('La carrera debe tener almenos 6 letras.')
         return carrera
 
+    def clean_creditos(self):
+        creditos = self.cleaned_data['creditos']
+        if creditos <= 0:
+            raise forms.ValidationError('Los créditos deben ser un número positivo.')
+        return creditos
+    
+    def clean_horas(self):
+        horas = self.cleaned_data['horas']
+        if horas <= 0:
+            raise forms.ValidationError('Las horas deben ser un número positivo.')
+        return horas
+    
+    def clean_sala(self):
+        sala = self.cleaned_data['sala']
+        if len(sala) > 5:
+            raise forms.ValidationError('La sala no puede tener más de 5 letras.')
+        return sala

@@ -18,7 +18,9 @@
         </ul>
     </nav>
 
-    <div>LISTADO DE PROFESORES</div>
+    <h1>LISTADO DE PROFESORES</h1>
+    <li><a href="{% url 'formulario_profesor' %}">Registrar Profesor</a></li>
+
     {% if profesores %}
     <table class="table">
         <thead>

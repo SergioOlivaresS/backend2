@@ -4,12 +4,10 @@
     <title>Crear Alumno</title>
 </head>
 <body>
-    <a href="{% url 'lista_alumnos' %}">Volver a la lista de alumnos</a>
+    <a href="{% url 'home' %}">Home</a>
     <h1>Crear Alumno</h1>
     <nav>
         <ul>
-            <li><a href="{% url 'ramosData' %}">Ramos</a></li>
-
     </nav>
     <form method="post">
         {% csrf_token %}

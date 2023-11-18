@@ -30,25 +30,30 @@ class ProfesorForm(forms.ModelForm):
     def clean_nombre(self):
         nombre = self.cleaned_data['nombre']
         if len(nombre) < 2:
-            raise forms.ValidationError('El nombre debe tener almenos 2 letras.')
+            raise forms.ValidationError('El nombre debe tener al menos 2 letras.')
         return nombre
     
     def clean_apellido(self):
         apellido = self.cleaned_data['apellido']
         if len(apellido) < 2:
-            raise forms.ValidationError('El apellido debe tener almenos 2 letras.')
+            raise forms.ValidationError('El apellido debe tener al menos 2 letras.')
         return apellido
     
-    def clean_telefono(self):
-        telefono = self.cleaned_data['telefono']
+    def clean_Telefono(self):
+        telefono = self.cleaned_data['Telefono']
         telefonostr = str(telefono)
-        if len(telefonostr) < 9:
-            raise forms.ValidationError('El telefono debe tener 9 numeros.')
+        if len(telefonostr) != 9 or telefono <= 0:
+            raise forms.ValidationError('El teléfono debe tener 9 números y ser positivo.')
         return telefono
     
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
+    def clean_Area(self):
+        area = self.cleaned_data['Area']
+        if len(area) < 4:
+            raise forms.ValidationError('El área debe tener al menos 4 letras.')
+        return area
+    
+    def clean_Email(self):
+        email = self.cleaned_data.get('Email')
         if email and email.find('@') == -1:
             raise forms.ValidationError("El correo debe contener @")
         return email
-

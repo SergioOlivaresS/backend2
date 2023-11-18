@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'CSS/formularioRamos.css'%}">
     <title>Ramos</title>
 </head>
-<body class="container mt-5">
-    <nav>
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-        </ul>
-    </nav>
-    <div>LISTADO DE RAMOS</div>
+<li><a href="{% url 'home' %}">Home</a></li>
+<body>
+    <h1>LISTADO DE RAMOS</h1>
+    <li><a href="{% url 'formularioramos' %}">Registrar Ramo</a></li>
+
     {% if ramos %}
     <table class="table">
         <thead>
