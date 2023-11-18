@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eliminar Profesor</title>
+</head>
+<body>
+    <h1>Eliminar Profesor</h1>
+    <p>¿Seguro que deseas eliminar a {{ profesor.nombre }} {{ profesor.apellido }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar eliminación">
+    </form>
+    <a href="{% url 'profesorData' %}">Cancelar </a>
+</body>
+</html>

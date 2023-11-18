@@ -32,8 +32,8 @@
                 <td>{{ alumno.fechaDeNacimiento }}</td>
                 <td>{{ alumno.email }}</td>
                 <td>
-                    {% for ramo in alumno.ramos.all %}
-                        {{ ramo.nombre }}<br>
+                    {% for inscripcion in alumno.inscripcion_set.all %}
+                        {{ inscripcion.ramo.nombre }}<br>
                     {% endfor %}
                 </td>
                 <td><a href="{% url 'editar_alumno' alumno.idalumno %}">Editar</a></td>

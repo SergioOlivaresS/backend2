@@ -1,17 +1,17 @@
 import re
 from typing import Any
 from django import forms
-from .models import Alumno , Ramos
+from .models import Alumno, Inscripcion, Ramos
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import timedelta
 
-
 class AlumnoForm(forms.ModelForm):
-    ramos = forms.ModelMultipleChoiceField(
+    nuevas_ramos = forms.ModelMultipleChoiceField(
         queryset=Ramos.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
+        label='Ramos'
     )
 
     class Meta:
@@ -21,8 +21,6 @@ class AlumnoForm(forms.ModelForm):
             'fechaDeNacimiento': forms.TextInput(attrs={'type': 'date', 'pattern': r'\d{2}/\d{2}/\d{4}', 'placeholder': 'dd/mm/yyyy'}),
         }
 
-
-   
     def clean_rut(self):
         rut = self.cleaned_data.get('rut')
         if rut:
@@ -34,21 +32,20 @@ class AlumnoForm(forms.ModelForm):
     def clean_nombre(self):
         nombre = self.cleaned_data['nombre']
         if len(nombre) < 2:
-            raise forms.ValidationError('El nombre debe tener almenos 2 letras.')
+            raise forms.ValidationError('El nombre debe tener al menos 2 letras.')
         return nombre
     
     def clean_apellido(self):
         apellido = self.cleaned_data['apellido']
         if len(apellido) < 2:
-            raise forms.ValidationError('El apellido debe tener almenos 2 letras.')
+            raise forms.ValidationError('El apellido debe tener al menos 2 letras.')
         return apellido
     
     def clean_carrera(self):
         carrera = self.cleaned_data['carrera']
         if len(carrera) < 6:
-            raise forms.ValidationError('La carrera debe tener almenos 6 letras.')
+            raise forms.ValidationError('La carrera debe tener al menos 6 letras.')
         return carrera
-
 
     def clean_fechaDeNacimiento(self):
         fecha_nacimiento = self.cleaned_data.get('fechaDeNacimiento')
@@ -63,3 +60,13 @@ class AlumnoForm(forms.ModelForm):
         if email and email.find('@') == -1:
             raise forms.ValidationError("El correo debe contener @")
         return email
+    
+    def save(self, commit=True):
+        alumno = super().save(commit)
+        
+        Inscripcion.objects.filter(alumno=alumno).delete()
+
+        for ramo in self.cleaned_data['nuevas_ramos']:
+            Inscripcion.objects.create(alumno=alumno, ramo=ramo)
+
+        return alumno
