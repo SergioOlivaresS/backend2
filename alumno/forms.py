@@ -1,20 +1,25 @@
 import re
 from typing import Any
 from django import forms
-from .models import Alumno
+from .models import Alumno , Ramos
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import timedelta
 
 
 class AlumnoForm(forms.ModelForm):
+    ramos = forms.ModelMultipleChoiceField(
+        queryset=Ramos.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
     class Meta:
         model = Alumno
         fields = '__all__'
         widgets = {
-           'fechaDeNacimiento': forms.TextInput(attrs={'type': 'date', 'pattern': r'\d{2}/\d{2}/\d{4}', 'placeholder': 'dd/mm/yyyy'}),
+            'fechaDeNacimiento': forms.TextInput(attrs={'type': 'date', 'pattern': r'\d{2}/\d{2}/\d{4}', 'placeholder': 'dd/mm/yyyy'}),
         }
-        
 
 
    

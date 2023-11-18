@@ -9,7 +9,6 @@
     <nav>
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
-
         </ul>
     </nav>
     <table>
@@ -20,6 +19,7 @@
             <th>Carrera</th>
             <th>Fecha de Nacimiento</th>
             <th>Email</th>
+            <th>Ramos</th>  
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
@@ -31,12 +31,15 @@
                 <td>{{ alumno.carrera }}</td>
                 <td>{{ alumno.fechaDeNacimiento }}</td>
                 <td>{{ alumno.email }}</td>
+                <td>
+                    {% for ramo in alumno.ramos.all %}
+                        {{ ramo.nombre }}<br>
+                    {% endfor %}
+                </td>
                 <td><a href="{% url 'editar_alumno' alumno.idalumno %}">Editar</a></td>
                 <td><a href="{% url 'eliminar_alumno' alumno.idalumno %}">Eliminar</a></td>
             </tr>
         {% endfor %}
     </table>
-
 </body>
-
 </html>
