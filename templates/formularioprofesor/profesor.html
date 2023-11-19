@@ -1,56 +1,47 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'CSS/formularioProfesor.css' %}">
     <title>Profesores</title>
 </head>
 
-<body class="container mt-5">
+<body>
+    <a href="{% url 'home' %}">Home</a>
+    <h1>LISTADO DE PROFESORES</h1>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-
+            <li><a href="{% url 'formulario_profesor' %}">Registrar Profesor</a></li>
         </ul>
     </nav>
-
-    <h1>LISTADO DE PROFESORES</h1>
-    <li><a href="{% url 'formulario_profesor' %}">Registrar Profesor</a></li>
-
     {% if profesores %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>RUT</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Teléfono</th>
-                <th>Área</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for profesor in profesores %}
-            <tr>
-                <td>{{ profesor.RUT }}</td>
-                <td>{{ profesor.nombre }}</td>
-                <td>{{ profesor.apellido }}</td>
-                <td>{{ profesor.Telefono }}</td>
-                <td>{{ profesor.Area }}</td>
-                <td>{{ profesor.Email }}</td>
-                <td>
-                    <a href="{% url 'eliminar_profesor' profesor.id %}">Eliminar</a>
-                </td>
-                <td>
-                    <a href="{% url 'modificar_profesor' profesor.id %}">Modificar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+    <table>
+        <tr>
+            <th>RUT</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Área</th>
+            <th>Email</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for profesor in profesores %}
+        <tr>
+            <td>{{ profesor.RUT }}</td>
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.apellido }}</td>
+            <td>{{ profesor.Telefono }}</td>
+            <td>{{ profesor.Area }}</td>
+            <td>{{ profesor.Email }}</td>
+            <td>
+                <a href="{% url 'modificar_profesor' profesor.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'eliminar_profesor' profesor.id %}">Eliminar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
     </table>
     {% else %}
     <div>No hay profesores</div>

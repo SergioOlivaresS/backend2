@@ -54,6 +54,6 @@ class RamosForm(forms.ModelForm):
     
     def clean_sala(self):
         sala = self.cleaned_data['sala']
-        if len(sala) > 5:
-            raise forms.ValidationError('La sala no puede tener más de 5 letras.')
+        if len(sala) < 3:
+            raise forms.ValidationError('La sala no puede tener menos de 3 letras.')
         return sala

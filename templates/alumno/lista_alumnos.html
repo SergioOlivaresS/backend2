@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Alumnos</title>
 </head>
 <body>
@@ -11,19 +13,23 @@
             <li><a href="{% url 'crear_alumno' %}">Crear alumno</a></li>
         </ul>
     </nav>
+    {% if alumnos %}
     <table>
-        <tr>
-            <th>RUT</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Carrera</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Email</th>
-            <th>Ramos</th>  
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-        {% for alumno in alumnos %}
+        <thead>
+            <tr>
+                <th>RUT</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Carrera</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Email</th>
+                <th>Ramos</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
             <tr>
                 <td>{{ alumno.rut }}</td>
                 <td>{{ alumno.nombre }}</td>
@@ -33,13 +39,17 @@
                 <td>{{ alumno.email }}</td>
                 <td>
                     {% for inscripcion in alumno.inscripcion_set.all %}
-                        {{ inscripcion.ramo.nombre }}<br>
+                        {{ inscripcion.ramo.nombre }}
                     {% endfor %}
                 </td>
                 <td><a href="{% url 'editar_alumno' alumno.idalumno %}">Editar</a></td>
                 <td><a href="{% url 'eliminar_alumno' alumno.idalumno %}">Eliminar</a></td>
             </tr>
-        {% endfor %}
+            {% endfor %}
+        </tbody>
     </table>
+    {% else %}
+    <div>No hay alumnos</div>
+    {% endif %}
 </body>
 </html>

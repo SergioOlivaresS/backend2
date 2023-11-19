@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramos</title>
 </head>
-<li><a href="{% url 'home' %}">Home</a></li>
 <body>
+    <a href="{% url 'home' %}">Home</a>
     <h1>LISTADO DE RAMOS</h1>
-    <li><a href="{% url 'formularioramos' %}">Registrar Ramo</a></li>
-
+    <nav>
+        <ul>
+            <li><a href="{% url 'formularioramos' %}">Registrar Ramo</a>
+        </ul>
+    </nav>
     {% if ramos %}
-    <table class="table">
-        <thead>
-            <tr> 
+    <table>
+            <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
@@ -22,37 +21,34 @@
                 <th>Créditos</th>
                 <th>Horas</th>
                 <th>Sala</th>
-                <th>Profesor</th> 
-                <th>Acciones</th>
+                <th>Profesor</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
-        </thead>
-        <tbody>
             {% for r in ramos %}
-                <tr> 
-                    <td scope="row">{{ r.idRamo }}</td>
-                    <td>{{ r.nombre }}</td>
-                    <td>{{ r.descripcion }}</td>
-                    <td>{{ r.carrera }}</td>
-                    <td>{{ r.creditos }}</td>
-                    <td>{{ r.horas }}</td>
-                    <td>{{ r.sala }}</td>
-                    <td>
-                        {% if r.profesor %}
-                            {{ r.profesor.nombre }} {{ r.profesor.apellido }}
-                        {% else %}
-                            Sin asignar
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{% url 'eliminar_ramo' r.idRamo %}">Eliminar</a>
-                        <a href="{% url 'modificar_ramo' r.idRamo %}">Modificar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ r.idRamo }}</td>
+                <td>{{ r.nombre }}</td>
+                <td>{{ r.descripcion }}</td>
+                <td>{{ r.carrera }}</td>
+                <td>{{ r.creditos }}</td>
+                <td>{{ r.horas }}</td>
+                <td>{{ r.sala }}</td>
+                <td>
+                    {% if r.profesor %}
+                    {{ r.profesor.nombre }} {{ r.profesor.apellido }}
+                    {% else %}
+                    Sin asignar
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'modificar_ramo' r.idRamo %}">Editar</a></td>
+                <td><a href="{% url 'eliminar_ramo' r.idRamo %}">Eliminar</a></td>
+            </tr>
             {% endfor %}
-        </tbody>
     </table>
     {% else %}
     <div>No hay ramos</div>
     {% endif %}
 </body>
+
 </html>
